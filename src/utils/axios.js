@@ -3,7 +3,7 @@ import store from '~/redux/store';
 import { clearUserInfo } from '~/redux/actions';
 
 const instance = axios.create({
-    baseURL: 'https://localhost:7072/api',
+    baseURL: import.meta.env.VITE_BACKEND_URL,
     withCredentials: true,
 });
 
@@ -24,7 +24,7 @@ export const SetupInterceptors = (navigate) => {
         async function (error) {
             const { config } = error;
 
-            if (error.response.status == 401) {
+            if (error.response?.status == 401) {
                 navigate('/login');
                 store.dispatch(clearUserInfo());
                 localStorage.removeItem('isAuthenticated');

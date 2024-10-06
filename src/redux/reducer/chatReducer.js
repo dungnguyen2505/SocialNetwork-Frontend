@@ -1,4 +1,4 @@
-import { OPEN_CHAT, CLOSE_CHAT } from '../actions/chatActions';
+import { OPEN_CHAT, CLOSE_CHAT, CLOSE_ALL_CHAT, UPDATE_GROUP_CHAT_AVATAR } from '../actions/chatActions';
 
 const initialState = {
     openChats: [],
@@ -31,6 +31,20 @@ const chatReducer = (state = initialState, action) => {
             return {
                 ...state,
                 openChats: updatedOpenChats,
+            };
+        }
+        case CLOSE_ALL_CHAT: {
+            return {
+                ...state,
+                openChats: [],
+            };
+        }
+        case UPDATE_GROUP_CHAT_AVATAR: {
+            const { groupId, avatar } = action.payload;
+
+            return {
+                ...state,
+                openChats: state.openChats.map((chat) => (chat.id === groupId ? { ...chat, avatar } : chat)),
             };
         }
         default:
