@@ -54,38 +54,38 @@ function App() {
     );
 }
 
-function FetchUserInfo() {
-    const dispatch = useDispatch();
-    const location = useLocation();
+// function FetchUserInfo() {
+//     const dispatch = useDispatch();
+//     const location = useLocation();
 
-    useEffect(() => {
-        const fetchPersonalInfo = async () => {
-            try {
-                const res = await getPersonalInfoService();
-                dispatch(
-                    actions.saveUserInfo({
-                        id: res?.id,
-                        firstName: res?.firstName,
-                        lastName: res?.lastName,
-                        age: res?.age,
-                        avatar: res?.avatar,
-                        homeTown: res?.homeTown,
-                        school: res?.school,
-                        workplace: res?.workplace,
-                    }),
-                );
-            } catch (error) {
-                console.log(error);
-            }
-        };
+//     useEffect(() => {
+//         const fetchPersonalInfo = async () => {
+//             try {
+//                 const res = await getMyInfoService();
+//                 dispatch(
+//                     actions.saveUserInfo({
+//                         id: res?.id,
+//                         firstName: res?.firstName,
+//                         lastName: res?.lastName,
+//                         age: res?.age,
+//                         avatar: res?.avatar,
+//                         homeTown: res?.homeTown,
+//                         school: res?.school,
+//                         workplace: res?.workplace,
+//                     }),
+//                 );
+//             } catch (error) {
+//                 console.log(error);
+//             }
+//         };
 
-        if (location.pathname !== '/login') {
-            fetchPersonalInfo();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+//         if (location.pathname !== '/login') {
+//             fetchPersonalInfo();
+//         }
+//         // eslint-disable-next-line react-hooks/exhaustive-deps
+//     }, []);
 
-    return null;
-}
+//     return null;
+// }
 
 export default App;

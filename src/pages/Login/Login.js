@@ -8,7 +8,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import styles from './Login.module.scss';
 import customToastify from '~/utils/customToastify';
 import { loginService, signUpService } from '~/services/authServices';
-import { getPersonalInfoService } from '~/services/userServices';
+import { getMyInfoService } from '~/services/userServices';
 import * as actions from '~/redux/actions';
 // import socket from '~/socket';
 
@@ -82,7 +82,7 @@ function Login() {
                 localStorage.setItem('isAuthenticated', true);
                 navigate('/');
                 const fetchPersonalInfo = async () => {
-                    const res = (await getPersonalInfoService()).data;
+                    const res = (await getMyInfoService()).data;
                     dispatch(
                         actions.saveUserInfo({
                             id: res?.id,
@@ -99,7 +99,6 @@ function Login() {
                     console.log(res);
                 };
                 fetchPersonalInfo();
-
             }
         } catch (error) {
             console.log(error);

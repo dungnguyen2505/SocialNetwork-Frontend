@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { parseISO, format } from 'date-fns';
+// import { parseISO, format } from 'date-fns';
 
 export const calculateTime = (iso8601 = '') => {
     if (!iso8601) return null;
@@ -46,11 +46,11 @@ export const getCroppedImg = (imageSrc, crop) => {
     });
 };
 
-export const uploadToCloudinary = async (image) => {
+export const uploadToCloudinary = async (fileImage) => {
     let formData = new FormData();
 
     formData.append('api_key', import.meta.env.VITE_CLOUDINARY_KEY);
-    formData.append('file', image);
+    formData.append('file', fileImage);
     formData.append('public_id', `file_${Date.now()}`);
     formData.append('timestamp', (Date.now() / 1000) | 0);
     formData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
@@ -60,5 +60,29 @@ export const uploadToCloudinary = async (image) => {
         return res.data?.secure_url;
     } catch (error) {
         console.error('Error uploading image to Cloudinary:', error);
+    }
+};
+
+export const timeDifferenceFromNow = (isoDate) => {
+    const now = new Date();
+    const past = new Date(isoDate);
+    const diffMs = now - past;
+
+    const seconds = Math.floor(diffMs / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+
+    if (weeks >= 1) {
+        return `${weeks} tuần`;
+    } else if (days >= 1) {
+        return `${days} ngày`;
+    } else if (hours >= 1) {
+        return `${hours} giờ`;
+    } else if (minutes >= 1) {
+        return `${minutes} phút`;
+    } else {
+        return `${seconds} giây`;
     }
 };

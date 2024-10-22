@@ -9,10 +9,11 @@ import socket from '~/socket';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '~/redux/actions';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
-import { userInfoSelector } from '~/redux/selectors';
+import { notificationsMessengerSelector, userInfoSelector } from '~/redux/selectors';
 
 const Messenger = ({ messengerRef, showMessenger, setShowMessenger }) => {
     const userInfo = useSelector(userInfoSelector);
+    const notificationsMessenger = useSelector(notificationsMessengerSelector);
     const dispatch = useDispatch();
 
     const [showCreateNewGroup, setShowCreateNewGroup] = useState(false);
@@ -106,20 +107,15 @@ const Messenger = ({ messengerRef, showMessenger, setShowMessenger }) => {
                         </div>
                     </div>
 
-                    {/* <div className={clsx(styles['conversation-wrapper'])}>
-                    <div className={clsx(styles['conversation'])}>
-                        <img className={clsx(styles['avatar'])} src={defaultAvatar} />
-                        <div>
-                            <h6 className={clsx(styles['name'])}>Hoàng Việt</h6>
-                            <div className={clsx(styles['last-message'])}>Không biết nữa</div>
-                        </div>
-                    </div>
-                </div> */}
                     {latestConversations?.map((conversation) => {
                         return (
                             <div
                                 key={`group-chat-${conversation?.id}`}
-                                className={clsx(styles['conversation-wrapper'])}
+                                className={clsx(styles['conversation-wrapper'], {
+                                    [[styles['unread']]]: notificationsMessenger?.some(
+                                        (noti) => noti?.senderId === conversation?.friendId && !noti?.isRead,
+                                    ),
+                                })}
                                 onClick={() =>
                                     addToOpenChatList(
                                         conversation?.groupId
