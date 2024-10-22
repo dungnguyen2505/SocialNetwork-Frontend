@@ -6,7 +6,7 @@ import OnlySidebarDefault from '~/layouts/OnlySidebarLayout';
 
 const routes = [
     { path: '/', component: Home },
-    { path: '/search', component: Search },
+    { path: '/search', component: Search, layout: OnlySidebarDefault },
     { path: '/login', component: Login },
     { path: '/profile', component: Profile, layout: OnlySidebarDefault },
 ];

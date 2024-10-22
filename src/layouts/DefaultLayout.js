@@ -9,7 +9,7 @@ const DefaultLayout = ({ children }) => {
             <div style={{ flex: 1 }}>
                 <Header />
                 <div className="d-flex">
-                    <div style={{ marginLeft: '7.6rem', flex: 1 }}>{children}</div>
+                    <div style={{ marginLeft: '7.6rem', marginTop: '-2.6rem', flex: 1 }}>{children}</div>
                     <FriendsList />
                 </div>
             </div>

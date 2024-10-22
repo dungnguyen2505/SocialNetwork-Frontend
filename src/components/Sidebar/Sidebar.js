@@ -10,7 +10,9 @@ const Sidebar = () => {
 
     return (
         <div className={clsx(styles['sidebar-wrapper'])}>
-            <Logo />
+            <Link to={'/'}>
+                <Logo />
+            </Link>
             <div className="d-flex flex-column">
                 <Link
                     to="/"
